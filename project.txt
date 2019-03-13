@@ -1,1 +1,1 @@
-./Debug/main.c.o ./Debug/client.c.o ./Debug/server.c.o   
+./Debug/client.c.o ./Debug/server.c.o ./Debug/TCP_client.c.o ./Debug/UDP_client.c.o   
