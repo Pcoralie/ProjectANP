@@ -8,7 +8,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="client.c" ExcludeProjConfig="Debug"/>
+    <File Name="client.c" ExcludeProjConfig=""/>
     <File Name="TCP_client.c" ExcludeProjConfig="Debug"/>
     <File Name="UDP_client.c" ExcludeProjConfig="Debug"/>
     <File Name="server_tcp.c" ExcludeProjConfig="Debug"/>
