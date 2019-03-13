@@ -25,10 +25,10 @@ static void end(void)
 #endif
 }
 
-static void app(const char *address, const char *name)
+static void app1(const char *address, const char *name)
 {
    SOCKADDR_IN sin = { 0 };
-   SOCKET sock = init_connection(address, &sin);
+   SOCKET sock = init_connection1(address, &sin);
    char buffer[BUF_SIZE];
 
    fd_set rdfs;
@@ -87,7 +87,7 @@ static void app(const char *address, const char *name)
    end_connection(sock);
 }
 
-static int init_connection(const char *address, SOCKADDR_IN *sin)
+static int init_connection1(const char *address, SOCKADDR_IN *sin)
 {
    /* UDP so SOCK_DGRAM */
    SOCKET sock = socket(AF_INET, SOCK_DGRAM, 0);
@@ -153,7 +153,7 @@ int main(int argc, char **argv)
 
    init();
 
-   app(argv[1], argv[2]);
+   app1(argv[1], argv[2]);
 
    end();
 

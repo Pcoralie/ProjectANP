@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "server_udp.h"
-#include "client_udp.h"
+//#include "client_udp.h"
 
 static void init(void)
 {

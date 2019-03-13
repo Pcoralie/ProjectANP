@@ -11,7 +11,7 @@ typedef int socklen_t;
 #include <errno.h>
 #include <string.h>
 
-#include "client.h"
+#include "client_tcp.h"
 
 static void init(void)
 {

@@ -32,20 +32,21 @@ typedef struct in_addr IN_ADDR;
 
 #define BUF_SIZE 1024
 
-static void init(void);
-static void end(void);
-static void app(const char *address, const char *name);
-static int init_connection(const char *address, SOCKADDR_IN *sin);
-static void end_connection(int sock);
-static int read_server(SOCKET sock, SOCKADDR_IN *sin, char *buffer);
-static void write_server(SOCKET sock, SOCKADDR_IN *sin, const char *buffer);
 
-#include "server_udp.h"
 
 typedef struct
 {
    SOCKADDR_IN sin;
    char name[BUF_SIZE];
 }Client;
+
+static void init(void);
+static void end(void);
+static void app1(const char *address, const char *name);
+static int init_connection1(const char *address, SOCKADDR_IN *sin);
+static void end_connection(int sock);
+static int read_server(SOCKET sock, SOCKADDR_IN *sin, char *buffer);
+static void write_server(SOCKET sock, SOCKADDR_IN *sin, const char *buffer);
+
 
 #endif /* guard */

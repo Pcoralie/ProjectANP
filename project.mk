@@ -62,7 +62,7 @@ AS       := C:/MinGW/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/client.c$(ObjectSuffix) $(IntermediateDirectory)/server.c$(ObjectSuffix) $(IntermediateDirectory)/TCP_client.c$(ObjectSuffix) $(IntermediateDirectory)/UDP_client.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/UDP_client.c$(ObjectSuffix) 
 
 
 
@@ -93,30 +93,6 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/client.c$(ObjectSuffix): client.c $(IntermediateDirectory)/client.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Utilisateur/Documents/ESILV/S8/advancedNetworkProgramming/ProjectANP/client.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/client.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/client.c$(DependSuffix): client.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/client.c$(ObjectSuffix) -MF$(IntermediateDirectory)/client.c$(DependSuffix) -MM client.c
-
-$(IntermediateDirectory)/client.c$(PreprocessSuffix): client.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/client.c$(PreprocessSuffix) client.c
-
-$(IntermediateDirectory)/server.c$(ObjectSuffix): server.c $(IntermediateDirectory)/server.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Utilisateur/Documents/ESILV/S8/advancedNetworkProgramming/ProjectANP/server.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/server.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/server.c$(DependSuffix): server.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/server.c$(ObjectSuffix) -MF$(IntermediateDirectory)/server.c$(DependSuffix) -MM server.c
-
-$(IntermediateDirectory)/server.c$(PreprocessSuffix): server.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/server.c$(PreprocessSuffix) server.c
-
-$(IntermediateDirectory)/TCP_client.c$(ObjectSuffix): TCP_client.c $(IntermediateDirectory)/TCP_client.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Utilisateur/Documents/ESILV/S8/advancedNetworkProgramming/ProjectANP/TCP_client.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/TCP_client.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/TCP_client.c$(DependSuffix): TCP_client.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/TCP_client.c$(ObjectSuffix) -MF$(IntermediateDirectory)/TCP_client.c$(DependSuffix) -MM TCP_client.c
-
-$(IntermediateDirectory)/TCP_client.c$(PreprocessSuffix): TCP_client.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/TCP_client.c$(PreprocessSuffix) TCP_client.c
-
 $(IntermediateDirectory)/UDP_client.c$(ObjectSuffix): UDP_client.c $(IntermediateDirectory)/UDP_client.c$(DependSuffix)
 	$(CC) $(SourceSwitch) "C:/Users/Utilisateur/Documents/ESILV/S8/advancedNetworkProgramming/ProjectANP/UDP_client.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/UDP_client.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/UDP_client.c$(DependSuffix): UDP_client.c
