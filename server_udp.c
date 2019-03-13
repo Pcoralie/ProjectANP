@@ -3,8 +3,8 @@
 #include <errno.h>
 #include <string.h>
 
-#include "server.h"
-#include "client.h"
+#include "server_udp.h"
+#include "client_udp.h"
 
 static void init(void)
 {

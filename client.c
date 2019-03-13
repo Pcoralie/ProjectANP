@@ -1,4 +1,6 @@
-/*#pragma comment(lib, "ws2_32.lib")
+#ifdef WIN32
+
+#pragma comment(lib, "ws2_32.lib")
 #include <windows.h>
 #include <windef.h>
 #include <winsock2.h>
@@ -8,31 +10,62 @@ typedef int socklen_t;
 #include <unistd.h>
 
 
+#elif defined (linux)
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h> /* close */
+#include <netdb.h> /* gethostbyname */
+#define INVALID_SOCKET -1
+#define SOCKET_ERROR -1
+#define closesocket(s) close(s)
+typedef int SOCKET;
+typedef struct sockaddr_in SOCKADDR_IN;
+typedef struct sockaddr SOCKADDR;
+typedef struct in_addr IN_ADDR;
+
+#else
+
+#error not defined for this platform
+
+#endif
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+
 int main(int argc, char *argv[])
 {
-	WSADATA wsa; 
-	SOCKET s; 
-	// Connect to a server 
+#ifdef WIN32
+	WSADATA wsa;
+#endif
+
+	SOCKET s;
+	// Connect to a server
 	struct sockaddr_in server;
 
-	
-	printf("\nInitialising Winsock..."); 
+
+
+	printf("\nInitialising Winsock...");
+#ifdef WIN32
 	if (WSAStartup(MAKEWORD(2,2), &wsa) != 0)
-	{		
+	{
 		printf("Failed. Error Code : %d",WSAGetLastError());
 		return 1;
 	}
-	
-	printf("Initialised.\n"); 
-	
-	// create a socket 
+#endif
+
+	printf("Initialised.\n");
+
+	// create a socket
 	if((s = socket(AF_INET , SOCK_STREAM , 0 )) == INVALID_SOCKET)
 	{
 		printf("Could not create socket : %d" , WSAGetLastError());
 		return 1;
 	}
 	printf("Socket created.\n");
-	
+
 	server.sin_addr.s_addr = inet_addr("172.217.17.35"); //google.fr
 	server.sin_family = AF_INET; // The Internet Protocol version 4 (IPv4)
 	server.sin_port = htons( 80 ); // it would be a good idea to read Course Port Number
@@ -45,7 +78,7 @@ int main(int argc, char *argv[])
 	puts("Connected");
 
 	while (getchar() != '\n') ;
-	return 0; 
+	return 0;
 }
 
 /*
@@ -71,5 +104,5 @@ u_long S_addr;
 struct sockaddr {
 unsigned short sa_family; // address family, AF_xxx
 char sa_data[14]; // 14 bytes of protocol address
-}; 
+};
 */

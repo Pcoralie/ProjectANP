@@ -3,8 +3,8 @@
 #include <errno.h>
 #include <string.h>
 
-#include "server.h"
-#include "client.h"
+#include "server_tcp.h"
+#include "client_tcp.h"
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -29,9 +29,9 @@ static void end(void)
 #endif
 }
 
-static void app2(void)
+static void app(void)
 {
-   SOCKET sock = init_connection2();
+   SOCKET sock = init_connection();
    char buffer[BUF_SIZE];
    /* the index for the array */
    int actual = 0;
@@ -170,7 +170,7 @@ static void send_message_to_all_clients(Client *clients, Client sender, int actu
    }
 }
 
-static int init_connection2(void)
+static int init_connection(void)
 {
    SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
    SOCKADDR_IN sin = { 0 };
@@ -234,11 +234,11 @@ int main(int argc, char **argv)
 {
    init();
 
-   app2();
+   app();
 
    end();
 
 	while (getchar() != '\n') ;
-	
+
    return EXIT_SUCCESS;
 }

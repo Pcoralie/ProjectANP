@@ -40,7 +40,7 @@ static void end_connection(int sock);
 static int read_server(SOCKET sock, SOCKADDR_IN *sin, char *buffer);
 static void write_server(SOCKET sock, SOCKADDR_IN *sin, const char *buffer);
 
-#include "server.h"
+#include "server_udp.h"
 
 typedef struct
 {
