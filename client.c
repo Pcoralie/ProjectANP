@@ -4,9 +4,10 @@
 #include <windows.h>
 #include <windef.h>
 #include <winsock2.h>
-#include <winsock.h>
 typedef int socklen_t;
-
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
 
 #elif defined (linux)
@@ -15,9 +16,8 @@ typedef int socklen_t;
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <unistd.h> // close 
-
-#include <netdb.h> // gethostbyname 
+#include <unistd.h> /* close */
+#include <netdb.h> /* gethostbyname */
 #define INVALID_SOCKET -1
 #define SOCKET_ERROR -1
 #define closesocket(s) close(s)
@@ -30,26 +30,21 @@ typedef struct in_addr IN_ADDR;
 
 #error not defined for this platform
 
-#endif 
+#endif
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
 
 int main(int argc, char *argv[])
 {
 #ifdef WIN32
 	WSADATA wsa;
-	// or WSAData wsa; 
 #endif
 
 	SOCKET s;
 	// Connect to a server
 	struct sockaddr_in server;
-	char * message , server_reply[2000];
-	int recv_size;
+
 
 
 	printf("\nInitialising Winsock...");
@@ -66,16 +61,17 @@ int main(int argc, char *argv[])
 	// create a socket
 	if((s = socket(AF_INET , SOCK_STREAM , 0 )) == INVALID_SOCKET)
 	{
+#ifdef WIN32
 		printf("Could not create socket : %d" , WSAGetLastError());
+#endif
 		return 1;
 	}
 	printf("Socket created.\n");
 
+
 	server.sin_addr.s_addr = inet_addr("172.217.17.35"); //google.fr
-	server.sin_addr.s_addr = inet_addr("205.178.189.131"); //bourse.com
 	server.sin_family = AF_INET; // The Internet Protocol version 4 (IPv4)
 	server.sin_port = htons( 80 ); // it would be a good idea to read Course Port Number
-	
 	//Connect to remote server
 	if (connect(s , (struct sockaddr *)&server , sizeof(server)) < 0)
 	{
@@ -83,38 +79,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	puts("Connected");
-	
-	//Send some data
-	message = "GET / HTTP/1.1\r\n\r\n";
-	if( send(s , message , strlen(message) , 0) < 0)
-	{
-		puts("Send failed");
-		return 1;
-	}
-	puts("Data Send\n");
-	
-	//Receive a reply from the server
-	if((recv_size = recv(s , server_reply , 2000 , 0)) == SOCKET_ERROR)
-	{
-		puts("recv failed");
-	}
-	puts("Reply received\n");
-
-	//Add a NULL terminating character to make it a proper string before printing
-	server_reply[recv_size] = '\0';
-	puts(server_reply);
-	
-	//Bind
-	if( bind(s ,(struct sockaddr *)&server , sizeof(server)) == SOCKET_ERROR)
-	{
-		printf("Bind failed with error code : %d" , WSAGetLastError());
-	}
-	puts("Bind done");
-	
-		
-	closesocket(s); // SOCKET s; for our program sample
-	
-	WSACleanup();
 
 	while (getchar() != '\n') ;
 	return 0;
