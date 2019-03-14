@@ -239,6 +239,5 @@ int main(int argc, char **argv)
    end();
 
 	while (getchar() != '\n') ;
-
    return EXIT_SUCCESS;
 }

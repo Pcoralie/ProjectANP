@@ -1,13 +1,14 @@
-//#ifdef WIN32
+#ifdef WIN32
 
 #pragma comment(lib, "ws2_32.lib")
 #include <windows.h>
 #include <windef.h>
 #include <winsock2.h>
+#include <winsock.h>
 typedef int socklen_t;
 
 
-/*
+
 #elif defined (linux)
 
 #include <sys/types.h>
@@ -29,7 +30,7 @@ typedef struct in_addr IN_ADDR;
 
 #error not defined for this platform
 
-#endif */
+#endif 
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -41,6 +42,7 @@ int main(int argc, char *argv[])
 {
 #ifdef WIN32
 	WSADATA wsa;
+	// or WSAData wsa; 
 #endif
 
 	SOCKET s;
@@ -111,6 +113,7 @@ int main(int argc, char *argv[])
 	
 		
 	closesocket(s); // SOCKET s; for our program sample
+	
 	WSACleanup();
 
 	while (getchar() != '\n') ;
