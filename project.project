@@ -9,14 +9,7 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="client.c" ExcludeProjConfig=""/>
-    <File Name="TCP_client.c" ExcludeProjConfig="Debug"/>
-    <File Name="UDP_client.c" ExcludeProjConfig="Debug"/>
-    <File Name="server_tcp.c" ExcludeProjConfig="Debug"/>
-    <File Name="server_udp.c" ExcludeProjConfig="Debug"/>
-    <File Name="client_tcp.h" ExcludeProjConfig=""/>
-    <File Name="server_tcp.h" ExcludeProjConfig=""/>
-    <File Name="client_udp.h" ExcludeProjConfig=""/>
-    <File Name="server_udp.h" ExcludeProjConfig=""/>
+    <File Name="server.c" ExcludeProjConfig="Debug"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
