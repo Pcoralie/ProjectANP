@@ -8,8 +8,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="client.c" ExcludeProjConfig=""/>
-    <File Name="server.c" ExcludeProjConfig="Debug"/>
+    <File Name="main.c"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

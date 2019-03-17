@@ -34,67 +34,23 @@ typedef struct in_addr IN_ADDR;
 #include <errno.h>
 #include<io.h>
 
-/*
-static struct command commands[] = {
-	{ "echo", "Prints the command line.", echo_func },
-	{ "help", "Prints a list of commands and their descriptions.", help_func },
-	{ "info", "Prints connection information.", info_func },
-	{ "quit", "Disconnects from the server.", quit_func },
-	{ "kill", "Shuts down the server.", kill_func },
-};
 
-
-static void echo_func( struct command *command, const char *params)
+static void help(void)
 {
-	evbuffer_add_printf(cmdsocket->buffer, "%s\n", params);
+	printf( 
+	"CLIENT COMMANDS:\n"
+						"/exit           \n"	
+                        "/help          Lists all client commands. The thing you just typed in.\n"
+                        "/listu         Lists all clients connected to server.\n"
+                        "/listf         Lists all files in a server.\n"
+						"/trfu          Transfert Upload file in a server.\n"
+						"/trfd          Transfert Download file in a server.\n"
+						"/private <user  Commute to private.\n"
+						"/public         Commute to public.\n"
+						"/ring <user>    Notification if user is connect.\n"
+						"/time          Displays how long the client has been connected to server.\n"); 
 }
 
-static void help_func(struct cmdsocket *cmdsocket, struct command *command, const char *params)
-{
-	int i;
-
-
-	for(i = 0; i < ARRAY_SIZE(commands); i++) {
-		evbuffer_add_printf(cmdsocket->buffer, "%s:\t%s\n", commands[i].name, commands[i].desc);
-	}
-}
-
-static void info_func(struct cmdsocket *cmdsocket, struct command *command, const char *params)
-{
-	char addr[INET6_ADDRSTRLEN];
-	const char *addr_start;
-
-
-	addr_start = inet_ntop(cmdsocket->addr.sin6_family, &cmdsocket->addr.sin6_addr, addr, sizeof(addr));
-	if(!strncmp(addr, "::ffff:", 7) && strchr(addr, '.') != NULL) {
-		addr_start += 7;
-	}
-
-	evbuffer_add_printf(
-			cmdsocket->buffer,
-			"Client address: %s\nClient port: %hu\n",
-			addr_start,
-			cmdsocket->addr.sin6_port
-			);
-}
-
-static void quit_func(struct cmdsocket *cmdsocket, struct command *command, const char *params)
-{
-	shutdown_cmdsocket(cmdsocket);
-}
-
-static void kill_func(struct cmdsocket *cmdsocket, struct command *command, const char *params)
-{
-
-	INFO_OUT("Shutting down server.\n");
-	if(event_base_loopexit(cmdsocket->evloop, NULL)) {
-		ERROR_OUT("Error shutting down server\n");
-	}
-	
-	shutdown_cmdsocket(cmdsocket);
-}
-
-*/
 static void init(void)
 {
 	printf("\nInitialising Winsock...");
@@ -131,15 +87,7 @@ int main(int argc , char *argv[])
 	char* client_ip = inet_ntoa(client.sin_addr); 
 	int client_port = ntohs(client.sin_port); 
 	char* message; 
-	/*
-	char *message, server_reply[2000];
-	int recv_size;
-	
-	char *hostname = "www.google.fr";
-	char ip[100];
-	struct hostent *he;
-	struct in_addr **addr_list;
-	int i;*/
+
 	
 	
 	// create a socket 
